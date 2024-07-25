@@ -36,7 +36,7 @@ export interface UserInput
 export interface UserOuput extends Required<UserAttributes> {}
 
 export class User
-  extends Model<UserAttributes, UserInput>
+  extends Model
   implements UserAttributes
 {
   id!: number;

@@ -155,6 +155,62 @@ curl -X POST https://signs-5n09.onrender.com/auth/login \
 
 ---
 
+### 3. Contact us
+
+#### Endpoint
+
+`POST /contact`
+
+#### Description
+
+send a contact us message
+
+#### Request
+
+##### Headers
+
+- **Content-Type**: `application/json`
+
+##### Body
+
+```json
+{
+    "email": "string",
+    "description": "string"
+}
+```
+
+- **email** (string): The email address of the user.
+- **password** (string): The description of your message.
+
+##### Example Request
+
+```sh
+curl -X POST https://signs-5n09.onrender.com/auth/login \
+-H "Content-Type: application/json" \
+-d '{
+     "email": "string",
+    "description": "string"
+}'
+```
+
+#### Response
+
+##### Status
+
+200 OK
+
+##### Body
+
+```json
+{
+  "status": true,
+  "message": "email sent successfully"
+}
+```
+---
+
+
 ## Error Handling Overview
 
 The `ErrorHandler` class distinguishes between trusted errors (operational errors) and critical errors. It provides appropriate responses for trusted errors and handles critical errors by logging them and terminating the process.

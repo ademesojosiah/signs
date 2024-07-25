@@ -4,6 +4,7 @@ import "dotenv/config";
 import db from "./model/index.model"
 import { errorMiddleware } from "./middleware/errorMiddleware";
 import authRouter from "./route/auth.route"
+import contactRouter from "./route/contact.route"
 import { sendSuccessResponse } from "./utils/response/successResponse";
 import { AppError } from "./utils/error/appError";
 
@@ -18,6 +19,7 @@ app.get("",(req:Request,res:Response)=>{
 })
 
 app.use("/auth",authRouter);
+app.use("/contact",contactRouter);
 
 
 app.use("*",(req:Request,res:Response)=>{

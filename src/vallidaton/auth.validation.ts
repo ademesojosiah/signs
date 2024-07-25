@@ -3,6 +3,7 @@ import Joi from "joi";
 import { UserInput } from "../model/user.model";
 import { NextFunction, Request, Response } from "express";
 import { AppError } from "../utils/error/appError";
+import { ContactUsInput } from "../model/contactUs.model";
 
 export async function signUpValidator(
   req: Request,
@@ -88,3 +89,23 @@ export async function resetInputValidator(
     throw new AppError(401, error.message);
   }
 }
+
+
+export async function ContactUsValidator(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    const signup: ContactUsInput = req.body;
+    const schema = Joi.object({  
+      email: Joi.string().email().required(),
+  
+      description: Joi.string().required()
+    });
+    try {
+      await schema.validateAsync(signup);
+      next();
+    } catch (error: any) {
+      throw new AppError(401, error.message);
+    }
+  }

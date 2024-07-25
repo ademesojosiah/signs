@@ -3,6 +3,7 @@ import("dotenv/config");
 import { Sequelize, DataTypes } from "sequelize";
 import process from "process";
 import { User } from "./user.model";
+import { ContactUs } from "./contactUs.model";
 
 const sequelize = new Sequelize(
   process.env.DB_NAME as string,
@@ -24,13 +25,16 @@ const sequelize = new Sequelize(
 
 //init models
 User.initModel(sequelize);
+ContactUs.initModel(sequelize)
 
 
 // associate models
 User.associate();
+ContactUs.associate();
 
 
 export default {
   sequelize,
   User,
+  ContactUs
 };
