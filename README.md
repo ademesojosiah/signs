@@ -297,7 +297,3 @@ Critical errors are unexpected errors that indicate a serious problem in the app
 - **status** (boolean): Indicates that there was a critical error.
 - **message** (string): A generic error message for the client.
 
-
-
-
-## This README provides a detailed overview of the `signup` and `login` endpoints, including request and response formats, example requests and headers, and also error handling mechanisms for the `signup` and `login` endpoints, describing trusted and critical errors, showing the response formats.
