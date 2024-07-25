@@ -37,7 +37,7 @@ Creates a new user account. Expects user input data in the request body and retu
 - **fullname** (string): The full name of the user.
 - **email** (string): The email address of the user. It should be unique and not already registered.
 - **password** (string): The password for the user account. It will be hashed before storing.
-- **role** (string): The role assigned to the user (e.g., "user", "admin").
+- **role** (string): The role assigned to the user (e.g., "USER", "ADMIN").
 
 ##### Example Request
 
@@ -48,7 +48,7 @@ curl -X POST https://signs-5n09.onrender.com/auth/signup \
   "fullname": "John Doe",
   "email": "johndoe@example.com",
   "password": "password123",
-  "role": "user"
+  "role": "USER"
 }'
 ```
 
