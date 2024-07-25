@@ -40,7 +40,7 @@ export class ContactUs
         description:{
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true, 
+            unique: false, 
         },
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE,
