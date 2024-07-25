@@ -12,7 +12,7 @@ export async function signUpValidator(
 ): Promise<void> {
   const signup: UserInput = req.body;
   const schema = Joi.object({
-    fullname: Joi.string().alphanum().min(3).max(30).required(),
+    fullname: Joi.string().required(),
     password: Joi.string()
       .required()
       .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
