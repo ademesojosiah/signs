@@ -5,13 +5,16 @@ import db from "./model/index.model"
 import { errorMiddleware } from "./middleware/errorMiddleware";
 import authRouter from "./route/auth.route"
 import contactRouter from "./route/contact.route"
+// import signRouter from "./route/sign.route"
 import { sendSuccessResponse } from "./utils/response/successResponse";
 import { AppError } from "./utils/error/appError";
+import cors from 'cors';
 
 const app : Application = express();
 
 const PORT = process.env.PORT
 
+app.use(cors());
 app.use(json())
 
 app.get("",(req:Request,res:Response)=>{
@@ -20,6 +23,7 @@ app.get("",(req:Request,res:Response)=>{
 
 app.use("/auth",authRouter);
 app.use("/contact",contactRouter);
+// app.use("/sign",contactRouter);
 
 
 app.use("*",(req:Request,res:Response)=>{
