@@ -14,7 +14,13 @@ const app : Application = express();
 
 const PORT = process.env.PORT
 
-app.use(cors());
+const corsOptions = {
+    origin: '*', // Allow all origins
+    methods: 'GET,PUT,PATCH,POST,DELETE', // Allowed methods
+    allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization' // Allowed headers
+  };
+
+app.use(cors(corsOptions));
 app.use(json())
 
 app.get("",(req:Request,res:Response)=>{
