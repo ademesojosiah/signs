@@ -5,8 +5,8 @@ import { multerUpload, uploadVideo } from "../utils/multer/multer";
 
 const router = Router();
 
-router.post("",uploadVideo.single("image"),saveVideo, signController.createSignController);
-router.post("/all",signController.allSignController);
+router.post("",uploadVideo.single("video"),saveVideo, signController.createSignController);
+router.get("/all",signController.allSignController);
 
 
 export default router;

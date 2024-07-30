@@ -210,6 +210,101 @@ curl -X POST https://signs-5n09.onrender.com/auth/login \
 ```
 ---
 
+### 4. create sign
+
+#### Endpoint
+
+`POST /sign`
+
+#### Description
+
+create a sign
+
+#### Request
+
+##### Headers
+
+- **Content-Type**: `application/json`
+
+##### Body
+##### Form data
+
+```json
+| field name | value |
+|----------|----------|
+| text    | HEllo testing | 
+| video    | 'WIN_20240730_04_17_11_Pro.mp4'  |
+
+```
+
+
+
+- **text** (string): The email address of the user.
+- **video** (string): The video path.
+
+##### Example Request
+![alt text](../../Downloads/signsImage.JPG)
+
+#### Response
+
+##### Status
+
+200 OK
+
+##### Body
+
+```json
+{
+  "status": true,
+  "message": "Sign created successfully",
+  "data": {
+    "text": "looking",
+    "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1722311967/signs/videos/unhvow8fkbtg4fctbexq.mp4"
+  }
+}
+```
+---
+
+### 5. Get all signs
+
+#### Endpoint
+
+`GET /sign/all`
+
+#### Description
+
+get all signs
+
+#### Response
+
+##### Status
+
+200 OK
+
+##### Body
+
+```json
+{
+  "status": true,
+  "message": "Sign fetched successfully",
+  "data": [
+    {
+      "text": "looking",
+      "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1722310073/qzyegqkir6ahil8sd8oy.mp4"
+    },
+    {
+      "text": "looking",
+      "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1722310514/signs/videos/nsia6tkx3auc4ynw9xh6.mov"
+    },
+    {
+      "text": "looking",
+      "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1722311967/signs/videos/unhvow8fkbtg4fctbexq.mp4"
+    }
+  ]
+}
+```
+---
+
 
 ## Error Handling Overview
 
