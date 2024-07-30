@@ -1,33 +1,35 @@
 "use strict";
 import { Model, Optional, Sequelize, DataTypes } from "sequelize";
+import { User } from "./user.model";
 
 
 
-export interface ContactUsAttributes {
-  id:number
-  email: string;
-  description: string;
-  createdAt: Date;
-  updatedAt: Date;
+export interface SignsAttributes {
+  id: number
+  text: string;
+  videoUrl: string;
+  UserId?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
-export interface ContactUsInput
+export interface SignsInput
   extends Optional<
-    ContactUsAttributes,
+    SignsAttributes,
     "id"|
     "createdAt"
     | "updatedAt"
 
   > {}
-export interface ContactUsOuput extends Required<ContactUsAttributes> {}
+export interface ContactUsOuput extends Required<SignsAttributes> {}
 
-export class ContactUs
+export class Signs
   extends Model
-  implements ContactUsAttributes
+  implements SignsAttributes
 {
-  id!: number;
-  email!: string;
-  description!: string;
+  id! : number;
+  text!: string;
+  videoUrl!: string;
   createdAt!: Date;
   updatedAt!: Date;
 
@@ -41,12 +43,11 @@ export class ContactUs
           allowNull: false,
           autoIncrement: true,
         },
-        email: {
+        text: {
           type: DataTypes.STRING,
           allowNull: false,
-          unique: false,
         },
-        description:{
+        videoUrl:{
             type: DataTypes.STRING,
             allowNull: false,
             unique: false, 
@@ -57,12 +58,14 @@ export class ContactUs
       {
         sequelize,
         timestamps: true,
-        tableName: "ContactUs",
+        tableName: "Signs",
       }
     );
   }
 
   static associate() {
     // define association here
+    this.belongsTo(User);
+
   }
 }

@@ -4,6 +4,7 @@ import { Sequelize, DataTypes } from "sequelize";
 import process from "process";
 import { User } from "./user.model";
 import { ContactUs } from "./contactUs.model";
+import { Signs } from "./signs.model";
 
 const sequelize = new Sequelize(
   process.env.DB_NAME as string,
@@ -26,15 +27,18 @@ const sequelize = new Sequelize(
 //init models
 User.initModel(sequelize);
 ContactUs.initModel(sequelize)
+Signs.initModel(sequelize)
 
 
 // associate models
 User.associate();
 ContactUs.associate();
+Signs.associate();
 
 
 export default {
   sequelize,
   User,
-  ContactUs
+  ContactUs,
+  Signs
 };
