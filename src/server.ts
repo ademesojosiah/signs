@@ -50,6 +50,6 @@ app.use(errorMiddleware);
 
 app.listen(PORT, async()=>{
     console.log("server listening to http://localhost:"+PORT);
-    await db.sequelize.sync({ force:true});
+    await db.sequelize.sync({ alter:true});
 	console.log("database connected succesfully");
 })

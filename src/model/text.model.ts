@@ -45,7 +45,6 @@ export class Text
         },
         text: {
           type: DataTypes.STRING,
-          allowNull: false,
           unique:true,
         },
         createdAt: DataTypes.DATE,

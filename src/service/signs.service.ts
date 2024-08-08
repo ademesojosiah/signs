@@ -27,14 +27,7 @@ const createSignsService = async (payload: SignsAttributes): Promise<any> => {
 
 const getAllSignsService = async(): Promise<{text:string, videoUrls : string[] }[]> => {
   const texts: any = await textServices.getAllTextService();
-
-
-  return texts.map((text : any)=> {
-    return {
-      text: text.text,
-      videoUrls: text.ChildVideos
-    }
-  });
+  return texts;
 
 }
 

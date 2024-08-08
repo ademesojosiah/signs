@@ -3,13 +3,18 @@ import db from "../model/index.model";
 import { Text, TextInput } from "../model/text.model";
 import { Video } from "../model/video.model";
 import { AppError } from "../utils/error/appError";
+import videoService from "./video.service";
 
 const createTextService = async (payload: TextInput): Promise<Text> => {
   payload.text = payload.text;
 
   const oldText: Text | null = await db.Text.findOne({
-    where: { text: payload.text.trim() },
+    where: { text: payload.text !==null ? payload.text.trim(): payload.text },
   });
+
+  if(payload.videoId){
+    videoService.findVideoService(payload.videoId as number)
+}
 
   if (oldText) {
     throw new AppError(401, "text exist in the database");
@@ -29,6 +34,15 @@ const getAllTextService = async (): Promise<any[]> => {
   });
 };
 
-const textServices = { createTextService, getAllTextService };
+const findTextService = async (textId: number): Promise<Text> => {
+    const text: Text|null = await db.Text.findByPk(textId,{include:{model: Video, as: "childVideos",attributes: ["videoUrl"]}});
+  
+    if(!text){
+        throw new AppError(401,`text with ${textId} does not exist`)
+    }
+    return text;
+  };
+
+const textServices = { createTextService, getAllTextService , findTextService};
 
 export default textServices;

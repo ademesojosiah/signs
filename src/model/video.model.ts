@@ -33,7 +33,6 @@ export class Video extends Model implements VideoAttributes {
         },
         videoUrl: {
           type: DataTypes.STRING,
-          allowNull: false,
           unique: false,
         },
         createdAt: DataTypes.DATE,
