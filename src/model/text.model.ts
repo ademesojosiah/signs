@@ -1,35 +1,35 @@
 "use strict";
 import { Model, Optional, Sequelize, DataTypes } from "sequelize";
 import { User } from "./user.model";
+import { Video } from "./video.model";
 
 
 
-export interface SignsAttributes {
+export interface  TextAttributes {
   id: number
   text: string;
-  videoUrl: string;
   UserId?: number;
+  videoId?: number;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-export interface SignsInput
+export interface TextInput
   extends Optional<
-    SignsAttributes,
+    TextAttributes,
     "id"|
     "createdAt"
     | "updatedAt"
 
   > {}
-export interface ContactUsOuput extends Required<SignsAttributes> {}
+export interface TextOutput extends Required<TextAttributes> {}
 
-export class Signs
+export class Text
   extends Model
-  implements SignsAttributes
+  implements TextAttributes
 {
   id! : number;
   text!: string;
-  videoUrl!: string;
   createdAt!: Date;
   updatedAt!: Date;
 
@@ -46,11 +46,7 @@ export class Signs
         text: {
           type: DataTypes.STRING,
           allowNull: false,
-        },
-        videoUrl:{
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: false, 
+          unique:true,
         },
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE,
@@ -58,7 +54,7 @@ export class Signs
       {
         sequelize,
         timestamps: true,
-        tableName: "Signs",
+        tableName: "Text",
       }
     );
   }
@@ -66,6 +62,8 @@ export class Signs
   static associate() {
     // define association here
     this.belongsTo(User);
+    this.belongsTo(Video,{ as: 'parentVideo', foreignKey: 'videoId' });
+    this.hasMany(Video, { as: 'childVideos', foreignKey: 'textId'})
 
   }
 }

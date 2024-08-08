@@ -1,40 +1,43 @@
 import "express-async-errors";
 import db from "../model/index.model";
-import { Signs, SignsInput } from "../model/signs.model";
+import { SignsAttributes } from "../model/sign.model";
+import videoService from "./video.service";
+import textServices from "./text.service";
+import { Video } from "../model/video.model";
 
 
+const createSignsService = async (payload: SignsAttributes): Promise<any> => {
 
+  //save text to database
+  let text : any  = await textServices.createTextService({text: payload.text, UserId: payload.UserId});  
 
-const createSignsService = async (
-    payload: SignsInput
-  ): Promise<any> => {    
-  
-    const signs: Signs = await db.Signs.create(payload);
+  const video : Video = await videoService.createVideoService({videoUrl : payload.videoUrl,UserId: payload.UserId, textId:text.id});
 
-  
-    const response = {
-        text: signs.text,
-        videoUrl: signs.videoUrl
-    };
-  
-    return response;
+  text = await db.Text.findByPk(text.id, {
+    include: { model: Video, as: 'childVideos' ,attributes:["videoUrl"]}
+  });
+
+  const response = {
+    text: text.text,
+    videoUrls: text.childVideos,
   };
 
+  return response;
+};
 
-  const getAllSignsService = async(): Promise<any> => {
-    const signs: Signs[] = await db.Signs.findAll();
-
-  
-    return signs.map(sign => {
-      return {
-        text: sign.text,
-        videoUrl: sign.videoUrl
-      }
-    });
-
-  }
+const getAllSignsService = async(): Promise<{text:string, videoUrls : string[] }[]> => {
+  const texts: any = await textServices.getAllTextService();
 
 
-const contactUsService = {createSignsService, getAllSignsService};
+  return texts.map((text : any)=> {
+    return {
+      text: text.text,
+      videoUrls: text.ChildVideos
+    }
+  });
 
-export default contactUsService;
+}
+
+const signsService = { createSignsService, getAllSignsService };
+
+export default signsService;

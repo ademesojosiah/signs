@@ -1,22 +1,23 @@
 import { Request, Response } from "express";
 import signsService from "../service/signs.service";
 import { sendSuccessResponse } from "../utils/response/successResponse";
-import { SignsInput } from "../model/signs.model";
+import { SignsAttributes } from "../model/sign.model";
 
-const createSignController = async (req:Request , res:Response) =>{
-    const payload : SignsInput = req.body;
+const createSignController = async (req: Request, res: Response) => {
+  const payload: SignsAttributes = req.body;
 
-    const response = await signsService.createSignsService(payload);
+  console.log(payload);
+  
 
-    sendSuccessResponse(res,200, "Sign created successfully",response);
+  const response = await signsService.createSignsService(payload);
 
-}
+  sendSuccessResponse(res, 200, "Sign created successfully", response);
+};
 
-const allSignController = async (req:Request , res:Response) =>{
-    const response = await signsService.getAllSignsService();
+const allSignController = async (req: Request, res: Response) => {
+  const response = await signsService.getAllSignsService();
 
-    sendSuccessResponse(res,200, "Sign fetched successfully",response);
+  sendSuccessResponse(res, 200, "Sign fetched successfully", response);
+};
 
-}
-
-export default {createSignController,allSignController};
+export default { createSignController, allSignController };

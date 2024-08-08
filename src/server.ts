@@ -6,6 +6,8 @@ import { errorMiddleware } from "./middleware/errorMiddleware";
 import authRouter from "./route/auth.route"
 import contactRouter from "./route/contact.route"
 import signRouter from "./route/sign.route"
+import textRouter from "./route/text.router"
+import videoRouter from "./route/video.route"
 import { sendSuccessResponse } from "./utils/response/successResponse";
 import { AppError } from "./utils/error/appError";
 import cors from 'cors';
@@ -37,6 +39,8 @@ app.get("",(req:Request,res:Response)=>{
 app.use("/auth",authRouter);
 app.use("/contact",contactRouter);
 app.use("/sign",signRouter);
+app.use("/text",textRouter);
+app.use("/video",videoRouter);
 
 
 app.use("*",(req:Request,res:Response)=>{
@@ -46,6 +50,6 @@ app.use(errorMiddleware);
 
 app.listen(PORT, async()=>{
     console.log("server listening to http://localhost:"+PORT);
-    await db.sequelize.sync({ alter:true});
+    await db.sequelize.sync({ force:true});
 	console.log("database connected succesfully");
 })
