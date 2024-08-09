@@ -501,13 +501,6 @@ The video controller endpoints manage operations related to video content in the
 ---
 
 ### **Summary**
-- **Text Controller:**
-  - **Create Text Entry:** `POST /text`
-  - **Get All Text Entries:** `GET /text/all`
-
-- **Video Controller:**
-  - **Create Video Entry:** `POST /video`
-  - **Get All Video Entries:** `GET /video/all`
 
 - **Text Entry Validation:** Send a `POST` request to `/text` with text data in JSON format.
 - **Video Entry Validation:** Send a `POST` request to `/video` with video data in JSON format.
