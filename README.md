@@ -306,6 +306,213 @@ get all signs
 ---
 
 
+### API Documentation: Text and Video Controllers
+
+#### **6. Text Controller**
+
+**Purpose:**  
+The text controller endpoints handle operations related to textual content in the system.
+
+---
+
+**A. Create Text Entry**
+
+- **Endpoint:**  
+  `POST /text`
+
+- **Description:**  
+  Creates a new text entry in the system.
+
+- **Request Payload Format:**
+  ```json
+  {
+    "title": "Sample Title",
+    "content": "This is the content of the text entry.",
+    "author": "Author Name",
+    "tags": ["tag1", "tag2"]
+  }
+  ```
+
+  **Payload Fields:**
+  - `title`: (string, required) The title of the text entry.
+  - `content`: (string, required) The main content of the text entry.
+  - `author`: (string, required) The name of the author.
+  - `tags`: (array of strings, optional) An array of tags associated with the text entry.
+
+- **Response:**
+  - **Success (200 OK):**
+    ```json
+    {
+      "status": "success",
+      "message": "text created successfully",
+      "data": {
+        "id": "unique_text_id",
+        "title": "Sample Title",
+        "content": "This is the content of the text entry.",
+        "author": "Author Name",
+        "tags": ["tag1", "tag2"],
+        "createdAt": "timestamp"
+      }
+    }
+    ```
+  - **Error (4xx/5xx):**
+    ```json
+    {
+      "status": "error",
+      "message": "Validation failed",
+      "errors": ["Error details..."]
+    }
+    ```
+
+---
+
+**B. Get All Text Entries**
+
+- **Endpoint:**  
+  `GET /text/all`
+
+- **Description:**  
+  Retrieves all text entries stored in the system.
+
+- **Response:**
+  - **Success (200 OK):**
+    ```json
+    {
+      "status": "success",
+      "message": "texts fetched successfully",
+      "data": [
+        {
+          "id": "unique_text_id",
+          "title": "Sample Title",
+          "content": "This is the content of the text entry.",
+          "author": "Author Name",
+          "tags": ["tag1", "tag2"],
+          "createdAt": "timestamp"
+        },
+        // Additional text entries...
+      ]
+    }
+    ```
+  - **Error (4xx/5xx):**
+    ```json
+    {
+      "status": "error",
+      "message": "Failed to fetch texts",
+      "errors": ["Error details..."]
+    }
+    ```
+
+---
+
+#### **7. Video Controller**
+
+**Purpose:**  
+The video controller endpoints manage operations related to video content in the system.
+
+---
+
+**A. Create Video Entry**
+
+- **Endpoint:**  
+  `POST /video`
+
+- **Description:**  
+  Creates a new video entry in the system.
+
+- **Request Payload Format:**
+  ```json
+  {
+    "title": "Sample Video Title",
+    "description": "This is the description of the video.",
+    "url": "http://path-to-video.com/video.mp4",
+    "tags": ["tag1", "tag2"]
+  }
+  ```
+
+  **Payload Fields:**
+  - `title`: (string, required) The title of the video.
+  - `description`: (string, required) A brief description of the video.
+  - `url`: (string, required) The URL where the video is hosted.
+  - `tags`: (array of strings, optional) An array of tags associated with the video.
+
+- **Response:**
+  - **Success (200 OK):**
+    ```json
+    {
+      "status": "success",
+      "message": "video created successfully",
+      "data": {
+        "id": "unique_video_id",
+        "title": "Sample Video Title",
+        "description": "This is the description of the video.",
+        "url": "http://path-to-video.com/video.mp4",
+        "tags": ["tag1", "tag2"],
+        "createdAt": "timestamp"
+      }
+    }
+    ```
+  - **Error (4xx/5xx):**
+    ```json
+    {
+      "status": "error",
+      "message": "Validation failed",
+      "errors": ["Error details..."]
+    }
+    ```
+
+---
+
+**B. Get All Video Entries**
+
+- **Endpoint:**  
+  `GET /video/all`
+
+- **Description:**  
+  Retrieves all video entries stored in the system.
+
+- **Response:**
+  - **Success (200 OK):**
+    ```json
+    {
+      "status": "success",
+      "message": "videos fetched successfully",
+      "data": [
+        {
+          "id": "unique_video_id",
+          "title": "Sample Video Title",
+          "description": "This is the description of the video.",
+          "url": "http://path-to-video.com/video.mp4",
+          "tags": ["tag1", "tag2"],
+          "createdAt": "timestamp"
+        },
+        // Additional video entries...
+      ]
+    }
+    ```
+  - **Error (4xx/5xx):**
+    ```json
+    {
+      "status": "error",
+      "message": "Failed to fetch videos",
+      "errors": ["Error details..."]
+    }
+    ```
+
+---
+
+### **Summary**
+- **Text Controller:**
+  - **Create Text Entry:** `POST /text`
+  - **Get All Text Entries:** `GET /text/all`
+
+- **Video Controller:**
+  - **Create Video Entry:** `POST /video`
+  - **Get All Video Entries:** `GET /video/all`
+
+- **Text Entry Validation:** Send a `POST` request to `/text` with text data in JSON format.
+- **Video Entry Validation:** Send a `POST` request to `/video` with video data in JSON format.
+
+
 ## Error Handling Overview
 
 The `ErrorHandler` class distinguishes between trusted errors (operational errors) and critical errors. It provides appropriate responses for trusted errors and handles critical errors by logging them and terminating the process.
