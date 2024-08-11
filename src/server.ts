@@ -1,13 +1,14 @@
 import express, { Express, Request,Response, Application, json } from "express";
 import "./utils/error/unHandledError";
 import "dotenv/config";
-import db from "./model/index.model"
+import db from "./model/index.model";
 import { errorMiddleware } from "./middleware/errorMiddleware";
-import authRouter from "./route/auth.route"
-import contactRouter from "./route/contact.route"
-import signRouter from "./route/sign.route"
-import textRouter from "./route/text.router"
-import videoRouter from "./route/video.route"
+import authRouter from "./route/auth.route";
+import contactRouter from "./route/contact.route";
+import signRouter from "./route/sign.route";
+import textRouter from "./route/text.router";
+import videoRouter from "./route/video.route";
+import ratingRouter from "./route/rating.route";
 import { sendSuccessResponse } from "./utils/response/successResponse";
 import { AppError } from "./utils/error/appError";
 import cors from 'cors';
@@ -41,6 +42,7 @@ app.use("/contact",contactRouter);
 app.use("/sign",signRouter);
 app.use("/text",textRouter);
 app.use("/video",videoRouter);
+app.use("/rate",ratingRouter);
 
 
 app.use("*",(req:Request,res:Response)=>{

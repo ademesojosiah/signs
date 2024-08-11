@@ -9,9 +9,9 @@ import { Video } from "../model/video.model";
 const createSignsService = async (payload: SignsAttributes): Promise<any> => {
 
   //save text to database
-  let text : any  = await textServices.createTextService({text: payload.text, UserId: payload.UserId});  
+  let text : any  = await textServices.createTextService({text: payload.text, userId: payload.UserId});  
 
-  const video : Video = await videoService.createVideoService({videoUrl : payload.videoUrl,UserId: payload.UserId, textId:text.id});
+  const video : Video = await videoService.createVideoService({videoUrl : payload.videoUrl,userId: payload.UserId, textId:text.id});
 
   text = await db.Text.findByPk(text.id, {
     include: { model: Video, as: 'childVideos' ,attributes:["videoUrl"]}

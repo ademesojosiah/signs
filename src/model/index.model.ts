@@ -6,6 +6,7 @@ import { User } from "./user.model";
 import { ContactUs } from "./contactUs.model";
 import { Text } from "./text.model";
 import { Video } from "./video.model";
+import { Rating } from "./rating.model";
 
 const sequelize = new Sequelize(
   process.env.DB_NAME as string,
@@ -30,17 +31,20 @@ User.initModel(sequelize);
 ContactUs.initModel(sequelize);
 Text.initModel(sequelize);
 Video.initModel(sequelize);
+Rating.initModel(sequelize);
 
 // associate models
 User.associate();
 ContactUs.associate();
 Text.associate();
 Video.associate();
+Rating.associate();
 
 export default {
   sequelize,
   User,
   ContactUs,
   Text,
-  Video
+  Video,
+  Rating
 };

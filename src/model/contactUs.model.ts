@@ -57,7 +57,7 @@ export class ContactUs
       {
         sequelize,
         timestamps: true,
-        tableName: "ContactUs",
+        tableName: "contact_us",
       }
     );
   }

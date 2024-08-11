@@ -289,16 +289,47 @@ get all signs
   "message": "Sign fetched successfully",
   "data": [
     {
-      "text": "looking",
-      "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1722310073/qzyegqkir6ahil8sd8oy.mp4"
+      "id": 1,
+      "text": "hi , i'm going up",
+      "videoUrls": [
+        {
+          "id": 1,
+          "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723396334/signs/videos/elzxdqcxkjyn8nq0bzhu.mp4",
+          "rating": "60%"
+        }
+      ]
     },
     {
-      "text": "looking",
-      "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1722310514/signs/videos/nsia6tkx3auc4ynw9xh6.mov"
+      "id": 2,
+      "text": "hello",
+      "videoUrls": [
+        {
+          "id": 2,
+          "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723399367/signs/videos/i7nwoyc6puti8i0qh8ni.mp4",
+          "rating": "60%"
+        },
+        {
+          "id": 3,
+          "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723400415/signs/videos/i3ogcxl7pkxzibh9howx.mp4",
+          "rating": 0
+        },
+        {
+          "id": 1,
+          "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723396334/signs/videos/elzxdqcxkjyn8nq0bzhu.mp4",
+          "rating": 0
+        }
+      ]
     },
     {
-      "text": "looking",
-      "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1722311967/signs/videos/unhvow8fkbtg4fctbexq.mp4"
+      "id": 3,
+      "text": " trying  agagin",
+      "videoUrls": [
+        {
+          "id": 1,
+          "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723396334/signs/videos/elzxdqcxkjyn8nq0bzhu.mp4",
+          "rating": 0
+        }
+      ]
     }
   ]
 }

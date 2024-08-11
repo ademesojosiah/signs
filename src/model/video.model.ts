@@ -2,11 +2,12 @@
 import { Model, Optional, Sequelize, DataTypes } from "sequelize";
 import { User } from "./user.model";
 import { Text } from "./text.model";
+import { Rating } from "./rating.model";
 
 export interface VideoAttributes {
   id: number;
   videoUrl: string;
-  UserId?: number;
+  userId?: number;
   textId?: number;
   createdAt?: Date;
   updatedAt?: Date;
@@ -41,15 +42,16 @@ export class Video extends Model implements VideoAttributes {
       {
         sequelize,
         timestamps: true,
-        tableName: "Video",
+        tableName: "video",
       }
     );
   }
 
   static associate() {
     // define association here
-    this.belongsTo(User);
-    this.belongsTo(Text, { as: "parentText", foreignKey: 'textId' });
-    this.hasMany(Text, { as: "childText", foreignKey: 'videoId' });
+    this.belongsTo(User,{ foreignKey: 'userId' });
+    this.belongsTo(Text, { as: "parentText", foreignKey: 'textId' }); 
+    this.hasMany(Text, { as: "childText", foreignKey: 'videoId' ,onDelete:"CASCADE"});
+    this.hasMany(Rating,{onDelete:"CASCADE", foreignKey:"videoId"})
   }
 }

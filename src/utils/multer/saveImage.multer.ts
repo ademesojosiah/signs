@@ -16,9 +16,8 @@ export const saveImage = async (req: Request, res: Response, next :NextFunction)
 };
 
 export const saveVideo = async (req: Request, res: Response, next :NextFunction): Promise<any> => {
-
-
-    // Assuming video file is sent as 'video' in multipart/form-data
+    try {
+      // Assuming video file is sent as 'video' in multipart/form-data
     if (!req.file || req.file.fieldname !== 'video') {
         return res.status(400).json({ message: 'No video file uploaded' });
       }
@@ -35,4 +34,8 @@ export const saveVideo = async (req: Request, res: Response, next :NextFunction)
 
     req.body = {...req.body,videoUrl:url };
     next();
+    } catch (error) {
+        next(error);
+    }
+
 };
