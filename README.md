@@ -356,42 +356,25 @@ The text controller endpoints handle operations related to textual content in th
 
 - **Request Payload Format:**
   ```json
-  {
-    "title": "Sample Title",
-    "content": "This is the content of the text entry.",
-    "author": "Author Name",
-    "tags": ["tag1", "tag2"]
-  }
+    {
+      "videoId":"1",
+      "text":" trying  agagin"
+    }
   ```
-
-  **Payload Fields:**
-  - `title`: (string, required) The title of the text entry.
-  - `content`: (string, required) The main content of the text entry.
-  - `author`: (string, required) The name of the author.
-  - `tags`: (array of strings, optional) An array of tags associated with the text entry.
-
 - **Response:**
   - **Success (200 OK):**
     ```json
     {
-      "status": "success",
+      "status": true,
       "message": "text created successfully",
       "data": {
-        "id": "unique_text_id",
-        "title": "Sample Title",
-        "content": "This is the content of the text entry.",
-        "author": "Author Name",
-        "tags": ["tag1", "tag2"],
-        "createdAt": "timestamp"
+        "id": 3,
+        "videoId": 1,
+        "text": " trying  agagin",
+        "updatedAt": "2024-08-11T18:00:15.624Z",
+        "createdAt": "2024-08-11T18:00:15.624Z",
+        "userId": null
       }
-    }
-    ```
-  - **Error (4xx/5xx):**
-    ```json
-    {
-      "status": "error",
-      "message": "Validation failed",
-      "errors": ["Error details..."]
     }
     ```
 
@@ -409,40 +392,65 @@ The text controller endpoints handle operations related to textual content in th
   - **Success (200 OK):**
     ```json
     {
-      "status": "success",
+      "status": true,
       "message": "texts fetched successfully",
       "data": [
         {
-          "id": "unique_text_id",
-          "title": "Sample Title",
-          "content": "This is the content of the text entry.",
-          "author": "Author Name",
-          "tags": ["tag1", "tag2"],
-          "createdAt": "timestamp"
+          "id": 1,
+          "text": "hi , i'm going up",
+          "videoUrls": [
+            {
+              "id": 1,
+              "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723396334/signs/videos/elzxdqcxkjyn8nq0bzhu.mp4",
+              "rating": "60%"
+            }
+          ]
         },
-        // Additional text entries...
+        {
+          "id": 2,
+          "text": "hello",
+          "videoUrls": [
+            {
+              "id": 2,
+              "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723399367/signs/videos/i7nwoyc6puti8i0qh8ni.mp4",
+              "rating": "60%"
+            },
+            {
+              "id": 3,
+              "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723400415/signs/videos/i3ogcxl7pkxzibh9howx.mp4",
+              "rating": "0%"
+            },
+            {
+              "id": 4,
+              "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723403669/signs/videos/sollidqddlhqjd02a5lu.mp4",
+              "rating": "0%"
+            },
+            {
+              "id": 1,
+              "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723396334/signs/videos/elzxdqcxkjyn8nq0bzhu.mp4",
+              "rating": "0%"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "text": " trying  agagin",
+          "videoUrls": [
+            {
+              "id": 1,
+              "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723396334/signs/videos/elzxdqcxkjyn8nq0bzhu.mp4",
+              "rating": "0%"
+            }
+          ]
+        }
       ]
     }
     ```
-  - **Error (4xx/5xx):**
-    ```json
-    {
-      "status": "error",
-      "message": "Failed to fetch texts",
-      "errors": ["Error details..."]
-    }
-    ```
+
 
 ---
 
 #### **7. Video Controller**
-
-**Purpose:**  
-The video controller endpoints manage operations related to video content in the system.
-
----
-
-**A. Create Video Entry**
 
 - **Endpoint:**  
   `POST /video`
@@ -450,44 +458,32 @@ The video controller endpoints manage operations related to video content in the
 - **Description:**  
   Creates a new video entry in the system.
 
-- **Request Payload Format:**
   ```json
-  {
-    "title": "Sample Video Title",
-    "description": "This is the description of the video.",
-    "url": "http://path-to-video.com/video.mp4",
-    "tags": ["tag1", "tag2"]
-  }
-  ```
+  ##### Body
+  ##### Form data
 
-  **Payload Fields:**
-  - `title`: (string, required) The title of the video.
-  - `description`: (string, required) A brief description of the video.
-  - `url`: (string, required) The URL where the video is hosted.
-  - `tags`: (array of strings, optional) An array of tags associated with the video.
+  ```json
+  | field name | value |
+  |----------|----------|
+  | text    | HEllo testing | 
+  | video    | 'WIN_20240730_04_17_11_Pro.mp4'  |
+
+  ```
 
 - **Response:**
   - **Success (200 OK):**
     ```json
     {
-      "status": "success",
+      "status": true,
       "message": "video created successfully",
       "data": {
-        "id": "unique_video_id",
-        "title": "Sample Video Title",
-        "description": "This is the description of the video.",
-        "url": "http://path-to-video.com/video.mp4",
-        "tags": ["tag1", "tag2"],
-        "createdAt": "timestamp"
+        "id": 5,
+        "textId": 2,
+        "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723405161/signs/videos/zgheo1nodhgviejuhee4.mp4",
+        "updatedAt": "2024-08-11T19:39:26.501Z",
+        "createdAt": "2024-08-11T19:39:26.501Z",
+        "userId": null
       }
-    }
-    ```
-  - **Error (4xx/5xx):**
-    ```json
-    {
-      "status": "error",
-      "message": "Validation failed",
-      "errors": ["Error details..."]
     }
     ```
 
@@ -505,18 +501,74 @@ The video controller endpoints manage operations related to video content in the
   - **Success (200 OK):**
     ```json
     {
-      "status": "success",
+      "status": true,
       "message": "videos fetched successfully",
       "data": [
         {
-          "id": "unique_video_id",
-          "title": "Sample Video Title",
-          "description": "This is the description of the video.",
-          "url": "http://path-to-video.com/video.mp4",
-          "tags": ["tag1", "tag2"],
-          "createdAt": "timestamp"
+          "id": 1,
+          "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723396334/signs/videos/elzxdqcxkjyn8nq0bzhu.mp4",
+          "texts": [
+            {
+              "id": 3,
+              "text": " trying  agagin",
+              "rating": "0%"
+            },
+            {
+              "id": 2,
+              "text": "hello",
+              "rating": "0%"
+            },
+            {
+              "id": 1,
+              "text": "hi , i'm going up",
+              "rating": "60%"
+            }
+          ]
         },
-        // Additional video entries...
+        {
+          "id": 2,
+          "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723399367/signs/videos/i7nwoyc6puti8i0qh8ni.mp4",
+          "texts": [
+            {
+              "id": 2,
+              "text": "hello",
+              "rating": "60%"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723400415/signs/videos/i3ogcxl7pkxzibh9howx.mp4",
+          "texts": [
+            {
+              "id": 2,
+              "text": "hello",
+              "rating": "0%"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723403669/signs/videos/sollidqddlhqjd02a5lu.mp4",
+          "texts": [
+            {
+              "id": 2,
+              "text": "hello",
+              "rating": "0%"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1723405161/signs/videos/zgheo1nodhgviejuhee4.mp4",
+          "texts": [
+            {
+              "id": 2,
+              "text": "hello",
+              "rating": "0%"
+            }
+          ]
+        }
       ]
     }
     ```
@@ -531,95 +583,39 @@ The video controller endpoints manage operations related to video content in the
 
 ---
 
-### **Summary**
 
-- **Text Entry Validation:** Send a `POST` request to `/text` with text data in JSON format.
-- **Video Entry Validation:** Send a `POST` request to `/video` with video data in JSON format.
+**A. Rate text and video**
 
+- **Endpoint:**  
+  `POST /rate`
 
-## Error Handling Overview
+- **Description:**  
+    Rate a video and text
 
-The `ErrorHandler` class distinguishes between trusted errors (operational errors) and critical errors. It provides appropriate responses for trusted errors and handles critical errors by logging them and terminating the process.
-
-## Error Responses
-
-### Trusted Errors
-
-Trusted errors are operational errors that the application expects and handles gracefully. They are typically instances of the `AppError` class. For these errors, the API responds with the specific HTTP status code and error message provided by the `AppError` instance.
-
-#### Response Format
-
-**HTTP Status Code:** `Defined by AppError`  
-**Content-Type:** `application/json`
-
-##### Example Response
-
-```json
-{
-    "status": "error",
-    "message": "Error message here"
-}
-```
-
-- **status** (string): Indicates that there was an error.
-- **message** (string): A descriptive error message for the client.
-
-##### Example Trusted Error Responses
-
-- **User Already Exists (Sign-Up)**
-
-    - **Status:** 401 Unauthorized
-    - **Body:**
-    
+- **Request Payload Format:**
+  ```json
+    {
+      "textId":"1",
+      "videoId":"1",
+      "ratingNo":3 //ratings are 1-5
+    }
+  ```
+- **Response:**
+  - **Success (200 OK):**
     ```json
     {
-        "status": "error",
-        "message": "User already exists"
+      "status": true,
+      "message": "rating created successfully",
+      "data": {
+        "id": 2,
+        "userId": null,
+        "textId": 1,
+        "videoId": 1,
+        "ratingNo": 3,
+        "updatedAt": "2024-08-11T18:45:23.484Z",
+        "createdAt": "2024-08-11T18:45:23.484Z"
+      }
     }
     ```
 
-- **User Does Not Exist (Login)**
-
-    - **Status:** 401 Unauthorized
-    - **Body:**
-
-    ```json
-    {
-        "status": "error",
-        "message": "User does not exist, Please sign up"
-    }
-    ```
-
-- **Incorrect Password (Login)**
-
-    - **Status:** 401 Unauthorized
-    - **Body:**
-
-    ```json
-    {
-        "status": "error",
-        "message": "Password is incorrect, Please try again"
-    }
-    ```
-
-### Critical Errors
-
-Critical errors are unexpected errors that indicate a serious problem in the application. These errors are not handled through the API responses but are logged, and the process is terminated to avoid further issues.
-
-#### Response Format
-
-**HTTP Status Code:** `500 Internal Server Error`  
-**Content-Type:** `application/json`
-
-##### Example Response
-
-```json
-{
-    "status": false,
-    "message": "Internal server error"
-}
-```
-
-- **status** (boolean): Indicates that there was a critical error.
-- **message** (string): A generic error message for the client.
-
+---

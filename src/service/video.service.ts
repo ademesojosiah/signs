@@ -19,12 +19,12 @@ const getAllVideoService = async (): Promise<any[]> => {
   const videos: Video[] = await db.Video.findAll({
     include:[
     {model: Text, as: "childText", attributes:["id","text"]},
-    {model: Text, as: "childText", attributes:["id","text"]}
+    {model: Text, as: "parentText", attributes:["id","text"]}
   ]});
 
   const processedVideos = await Promise.all(
     videos.map(async (video: any) => {
-      const texts = video.parentVideo ? [...video.childText, video.parentText] : [...video.childText];
+      const texts = video.parentText ? [...video.childText, video.parentText] : [...video.childText];
   
       // Fetch ratings and build the final result in one loop
       const newTexts = await Promise.all(

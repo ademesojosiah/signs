@@ -31,7 +31,7 @@ async function getRating(textId:number,videoId:number ){
 	}})
 
 	if(allRated.length <= 0){
-		return  0;
+		return  "0%";
 	}
 
 	let sum = 0;
