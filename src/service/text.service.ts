@@ -13,13 +13,23 @@ const createTextService = async (payload: TextInput): Promise<Text> => {
     where: { text: payload.text !==null ? payload.text.trim(): payload.text },
   });
 
-  if(payload.videoId){
-    videoService.findVideoService(payload.videoId as number)
-}
 
   if (oldText) {
-    throw new AppError(401, "text exist in the database");
+
+    if(payload.videoId){
+      let video: Video =  await videoService.findVideoService(payload.videoId as number)
+       await videoService.createVideoService({videoUrl : video.videoUrl,userId: payload.userId, textId:oldText.id})
+    }
+
+    return oldText;
   }
+
+  if(payload.videoId){
+     await videoService.findVideoService(payload.videoId as number)
+  }
+
+  
+
   const text: Text = await db.Text.create(payload);
   return text;
 };
