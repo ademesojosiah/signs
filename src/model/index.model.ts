@@ -7,6 +7,7 @@ import { ContactUs } from "./contactUs.model";
 import { Text } from "./text.model";
 import { Video } from "./video.model";
 import { Rating } from "./rating.model";
+import { TextVideo } from "./textVideo.model";
 
 const sequelize = new Sequelize(
   process.env.DB_NAME as string,
@@ -32,6 +33,7 @@ ContactUs.initModel(sequelize);
 Text.initModel(sequelize);
 Video.initModel(sequelize);
 Rating.initModel(sequelize);
+TextVideo.initModel(sequelize);
 
 // associate models
 User.associate();
@@ -39,6 +41,9 @@ ContactUs.associate();
 Text.associate();
 Video.associate();
 Rating.associate();
+TextVideo.associate();
+
+
 
 export default {
   sequelize,
@@ -46,5 +51,6 @@ export default {
   ContactUs,
   Text,
   Video,
-  Rating
+  Rating,
+  TextVideo
 };

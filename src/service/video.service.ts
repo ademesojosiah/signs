@@ -5,48 +5,62 @@ import { Video, VideoInput } from "../model/video.model";
 import textServices from "./text.service";
 import { AppError } from "../utils/error/appError";
 import ratingService from "./rating.service";
+import textVideoService from "./textVideo.service";
+import { TextVideo } from "../model/textVideo.model";
 
 const createVideoService = async (payload: VideoInput): Promise<Video> => { 
 
-    if(payload.textId){
-        textServices.findTextService(payload.textId as number)
-    }
-  const video: Video = await db.Video.create(payload);
+  const video: Video = await db.Video.create({videoUrl : payload.videoUrl,userId: payload.userId});
+
+
+  if(payload.textId){
+    await textServices.findTextService(payload.textId as number)
+    const response = textVideoService.createTextVideoService({textId:payload.textId, userId: payload.userId,videoId:video.id})
+    return response;
+ }
   return video;
 };
 
 const getAllVideoService = async (): Promise<any[]> => {
   const videos: Video[] = await db.Video.findAll({
     include:[
-    {model: Text, as: "childText", attributes:["id","text"]},
-    {model: Text, as: "parentText", attributes:["id","text"]}
-  ]});
+      {
+         model: TextVideo, 
+         as: "textVideos", 
+         attributes:["id","textId"],
+         include:[ 
+          { 
+            model: Text , 
+            as: 'text' ,
+            attributes:["id","text"]}] },
+    ]});
 
-  const processedVideos = await Promise.all(
-    videos.map(async (video: any) => {
-      const texts = video.parentText ? [...video.childText, video.parentText] : [...video.childText];
-  
-      // Fetch ratings and build the final result in one loop
-      const newTexts = await Promise.all(
-        texts.map(async (text) => {
-          const rating = await ratingService.getRating(text.id, video.id);
-          return {
-            id: text.id,
-            text: text.text,
-            rating: rating
-          };
-        })
-      );
-  
-      return {
-        id: video.id,
-        videoUrl: video.videoUrl,
-        texts: newTexts
-      };
-    })
-  );
-  
-  return processedVideos;
+
+    const processedTexts = await Promise.all(
+      videos.map(async (video: any) => {
+        const texts = [...video.textVideos];
+    
+        // Fetch ratings and build the final result in one loop
+        const newTexts = await Promise.all(
+          texts.map(async (text) => {
+            const rating = await ratingService.getRating(text.textId, video.id);
+            return {
+              id: text.id,
+              text: text.text.text,
+              rating: rating
+            };
+          })
+        );
+    
+        return {
+          id: video.id,
+          videoUrl: video.videoUrl,
+          texts: newTexts
+        };
+      })
+    );
+    
+    return processedTexts;
 };
 
 const findVideoService = async (videoId: number): Promise<Video> => {

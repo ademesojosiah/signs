@@ -1,8 +1,8 @@
 "use strict";
 import { Model, Optional, Sequelize, DataTypes } from "sequelize";
 import { User } from "./user.model";
-import { Text } from "./text.model";
 import { Rating } from "./rating.model";
+import { TextVideo } from "./textVideo.model";
 
 export interface VideoAttributes {
   id: number;
@@ -50,8 +50,7 @@ export class Video extends Model implements VideoAttributes {
   static associate() {
     // define association here
     this.belongsTo(User,{ foreignKey: 'userId' });
-    this.belongsTo(Text, { as: "parentText", foreignKey: 'textId' }); 
-    this.hasMany(Text, { as: "childText", foreignKey: 'videoId' ,onDelete:"CASCADE"});
+    this.hasMany(TextVideo, {foreignKey: 'videoId' ,onDelete:"CASCADE", as: "textVideos"});
     this.hasMany(Rating,{onDelete:"CASCADE", foreignKey:"videoId"})
   }
 }

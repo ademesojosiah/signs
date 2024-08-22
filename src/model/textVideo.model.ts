@@ -1,33 +1,34 @@
 "use strict";
 import { Model, Optional, Sequelize, DataTypes } from "sequelize";
 import { User } from "./user.model";
+import { Video } from "./video.model";
 import { Rating } from "./rating.model";
-import { TextVideo } from "./textVideo.model";
+import { Text } from "./text.model";
 
 
 
-export interface  TextAttributes {
+export interface  TextVideoAttributes {
   id: number
-  text: string;
+  textId?: number;
   userId?: number;
   videoId?: number;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-export interface TextInput
+export interface TextVideoInput
   extends Optional<
-    TextAttributes,
+    TextVideoAttributes,
     "id"|
     "createdAt"
     | "updatedAt"
 
   > {}
-export interface TextOutput extends Required<TextAttributes> {}
+export interface TextOutput extends Required<TextVideoAttributes> {}
 
-export class Text
+export class TextVideo
   extends Model
-  implements TextAttributes
+  implements TextVideoAttributes
 {
   id! : number;
   text!: string;
@@ -44,17 +45,13 @@ export class Text
           allowNull: false,
           autoIncrement: true,
         },
-        text: {
-          type: DataTypes.STRING,
-          unique:true,
-        },
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE,
       },
       {
         sequelize,
         timestamps: true,
-        tableName: "text",
+        tableName: "text_video",
       }
     );
   }
@@ -62,8 +59,9 @@ export class Text
   static associate() {
     // define association here
     this.belongsTo(User, { foreignKey: 'userId' });
-    this.hasMany(TextVideo, { foreignKey: 'textId', onDelete:"CASCADE", as :"textVideos"});
-    this.hasMany(Rating,{onDelete:"CASCADE", foreignKey:'textId'});
+    this.belongsTo(Video,{  foreignKey: 'videoId', as: "video" });    
+    this.belongsTo(Text,{  foreignKey: 'textId' , as: "text"});    
+
 
   }
 }
