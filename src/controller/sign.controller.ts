@@ -4,7 +4,7 @@ import { sendSuccessResponse } from "../utils/response/successResponse";
 import { SignsAttributes } from "../model/sign.model";
 
 const createSignController = async (req: Request, res: Response) => {
-  const payload: SignsAttributes = req.body;
+  const payload: SignsAttributes = {...req.body, userId: req.user?.id};
 
   console.log(payload);
   

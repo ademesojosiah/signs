@@ -89,8 +89,30 @@ const createUserService = async (
     return response;
   };
 
+  
+  const getDashboard = async (userId:number): Promise<any> => {
+    //CHECK IF USER EXISTS
+    const user: User | null = await db.User.findOne({
+      where: { id: userId },
+    });
+  
+    if (!user) throw new AppError(401, "User does not exist, Please sign up");
+  
+  
+    const response = {
+      data: {
+        fullname: user.fullname,
+        userRole: user.role
+      },
+    };
+  
+    return response;
+  };
+
+
   const userService = {
     createUserService,
-    loginUserService
+    loginUserService,
+    getDashboard
   }
 export default userService;

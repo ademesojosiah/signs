@@ -14,7 +14,7 @@ const createSignsService = async (payload: SignsAttributes): Promise<any> => {
 
   const video : Video = await videoService.createVideoService({videoUrl : payload.videoUrl,userId: payload.userId});
 
-  const response = await textVideoService.createTextVideoService({textId: text.id, videoId: video.id})
+  const response = await textVideoService.createTextVideoService({textId: text.id,userId: payload.userId , videoId: video.id})
   return response;
 };
 

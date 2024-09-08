@@ -9,9 +9,11 @@ import signRouter from "./route/sign.route";
 import textRouter from "./route/text.router";
 import videoRouter from "./route/video.route";
 import ratingRouter from "./route/rating.route";
+import dashboardRouter from "./route/dashboard.route";
 import { sendSuccessResponse } from "./utils/response/successResponse";
 import { AppError } from "./utils/error/appError";
 import cors from 'cors';
+import authorize from "./middleware/auth.middleware";
 
 const app : Application = express();
 
@@ -39,10 +41,11 @@ app.get("",(req:Request,res:Response)=>{
 
 app.use("/auth",authRouter);
 app.use("/contact",contactRouter);
-app.use("/sign",signRouter);
-app.use("/text",textRouter);
-app.use("/video",videoRouter);
-app.use("/rate",ratingRouter);
+app.use("/sign",authorize ,signRouter);
+app.use("/text",authorize,textRouter);
+app.use("/video",authorize,videoRouter);
+app.use("/rate", authorize,ratingRouter);
+app.use("/dashboard", authorize,dashboardRouter);
 
 
 app.use("*",(req:Request,res:Response)=>{

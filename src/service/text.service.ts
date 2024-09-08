@@ -80,6 +80,90 @@ const getAllTextService = async (): Promise<any[]> => {
   return processedTexts;
 }  
 
+const getAllMyTextService = async (userId:number): Promise<any[]> => {
+  const texts: Text[] = await db.Text.findAll({where:{userId: userId}, attributes:["id","text","createdAt","updatedAt"],
+    include: [
+      {
+         model: TextVideo,
+         as: "textVideos", 
+         attributes:["id","videoId"],
+         include:[ 
+          { 
+            model: Video , 
+            as: 'video' ,
+            attributes:["id","videoUrl"]}] },
+    ]
+  });
+  
+  const processedTexts = await Promise.all(
+    texts.map(async (text: any) => {
+      const videoUrls = [...text.textVideos];
+  
+      // Fetch ratings and build the final result in one loop
+      const newVideoUrls = await Promise.all(
+        videoUrls.map(async (video) => {
+          const rating = await ratingService.getRating(text.id, video.videoId);
+          return {
+            id: video.id,
+            videoUrl: video.video.videoUrl,
+            rating: rating
+          };
+        })
+      );
+  
+      return {
+        id: text.id,
+        text: text.text,
+        videoUrls: newVideoUrls
+      };
+    })
+  );
+  
+  return processedTexts;
+}  
+
+const findOneTextService = async (textId:number): Promise<any[]> => {
+  const texts: Text[] = await db.Text.findAll({where:{id:textId}, attributes:["id","text","createdAt","updatedAt"],
+    include: [
+      {
+         model: TextVideo, 
+         as: "textVideos", 
+         attributes:["id","videoId"],
+         include:[ 
+          { 
+            model: Video , 
+            as: 'video' ,
+            attributes:["id","videoUrl"]}] },
+    ]
+  });
+  
+  const processedTexts = await Promise.all(
+    texts.map(async (text: any) => {
+      const videoUrls = [...text.textVideos];
+  
+      // Fetch ratings and build the final result in one loop
+      const newVideoUrls = await Promise.all(
+        videoUrls.map(async (video) => {
+          const rating = await ratingService.getRating(text.id, video.videoId);
+          return {
+            id: video.id,
+            videoUrl: video.video.videoUrl,
+            rating: rating
+          };
+        })
+      );
+  
+      return {
+        id: text.id,
+        text: text.text,
+        videoUrls: newVideoUrls
+      };
+    })
+  );
+  
+  return processedTexts;
+}  
+
 const findTextService = async (textId: number): Promise<Text> => {
     const text: Text|null = await db.Text.findByPk(textId);
   
@@ -89,6 +173,6 @@ const findTextService = async (textId: number): Promise<Text> => {
     return text;
   };
 
-const textServices = { createTextService, getAllTextService , findTextService};
+const textServices = { createTextService, getAllTextService , findTextService, getAllMyTextService,findOneTextService};
 
 export default textServices;

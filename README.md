@@ -449,6 +449,72 @@ The text controller endpoints handle operations related to textual content in th
 
 
 ---
+#### **. Video Controller**
+
+- **Endpoint:**  
+  `GET /text`
+
+- **Description:**  
+  Get all the texts you created personally.
+
+- **Response:**
+  - **Success (200 OK):**
+    ```json
+  {
+    "status": true,
+    "message": "texts retrieved successfully",
+    "data": []
+  }
+    ```
+
+---
+
+#### **10. Video Controller**
+
+- **Endpoint:**  
+  `GET /video/:id`
+
+- **Description:**  
+  Get video by id.
+
+- **Response:**
+  - **Success (200 OK):**
+    ```json
+  {
+    "status": true,
+    "message": "text retrieved successfully",
+    "data": [
+      {
+        "id": 1,
+        "text": "hi , i'm going up",
+        "videoUrls": [
+          {
+            "id": 1,
+            "videoUrl": null,
+            "rating": "0%"
+          },
+          {
+            "id": 2,
+            "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1724318048/signs/videos/a6u5cwf5hlmyccmyhuvt.mp4",
+            "rating": "0%"
+          },
+          {
+            "id": 3,
+            "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1724318808/signs/videos/j45kenurczoffpkif7n6.mp4",
+            "rating": "0%"
+          },
+          {
+            "id": 11,
+            "videoUrl": "https://res.cloudinary.com/dhq33r9pa/video/upload/v1724765295/signs/videos/tr0l35jgeios9yy2v7qp.mp4",
+            "rating": "0%"
+          }
+        ]
+      }
+    ]
+  }
+    ```
+
+---
 
 #### **7. Video Controller**
 
@@ -582,7 +648,62 @@ The text controller endpoints handle operations related to textual content in th
     ```
 
 ---
+#### **9. Video Controller**
 
+- **Endpoint:**  
+  `GET /video`
+
+- **Description:**  
+  Get all the videos you created personally.
+
+- **Response:**
+  - **Success (200 OK):**
+    ```json
+  {
+    "status": true,
+    "message": "videos retrieved successfully",
+    "data": []
+  }
+    ```
+
+---
+
+#### **10. Video Controller**
+
+- **Endpoint:**  
+  `GET /video/:id`
+
+- **Description:**  
+  Get video by id.
+
+- **Response:**
+  - **Success (200 OK):**
+    ```json
+  {
+    "status": true,
+    "message": "videos retrieved successfully",
+    "data": [
+      {
+        "id": 1,
+        "videoUrl": null,
+        "texts": [
+          {
+            "id": 1,
+            "text": "hi , i'm going up",
+            "rating": "0%"
+          },
+          {
+            "id": 12,
+            "text": "testing text from front end",
+            "rating": "0%"
+          }
+        ]
+      }
+    ]
+  }
+    ```
+
+---
 
 **A. Rate text and video**
 
@@ -614,6 +735,29 @@ The text controller endpoints handle operations related to textual content in th
         "ratingNo": 3,
         "updatedAt": "2024-08-11T18:45:23.484Z",
         "createdAt": "2024-08-11T18:45:23.484Z"
+      }
+    }
+    ```
+
+---
+**B. Get dashboard**
+
+- **Endpoint:**  
+  `GET /dashboard`
+
+- **Description:**  
+    Get your dashboard info
+- **Response:**
+  - **Success (200 OK):**
+    ```json
+    {
+      "status": true,
+      "message": "profile retrieved successfully",
+      "data": {
+        "data": {
+          "fullname": "josiah ade",
+          "userRole": "USER"
+        }
       }
     }
     ```
