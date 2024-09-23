@@ -26,7 +26,7 @@ if (!fs.existsSync(uploadDir)){
 }
 
 const corsOptions = {
-    origin: ["http://localhost:3000", "http://localhost:5173", "https://sign-translation-app-frontend.vercel.app","https://sign-translation-app-dashboard.vercel.app"], // Allow all origins
+    origin: ["http://localhost:3000", "http://localhost:5173", "https://sign-translation-app-frontend.vercel.app","https://sign-translation-app-dashboard.vercel.app","https://sign-translation-app.onrender.com"], // Allow all origins
     methods: 'GET,PUT,PATCH,POST,DELETE', // Allowed methods
     allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization' // Allowed headers
   };
