@@ -37,7 +37,6 @@ class ErrorHandler {
 
       console.error('Application encountered a critical error. Exiting');
       console.error(error.message)
-      process.exit(1);
   }
 }
 
