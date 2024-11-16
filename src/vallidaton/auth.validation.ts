@@ -14,8 +14,7 @@ export async function signUpValidator(
   const schema = Joi.object({
     fullname: Joi.string().required(),
     password: Joi.string()
-    .required()
-    .pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,30}$")),
+    .required(),
   
 
 
@@ -39,9 +38,7 @@ export async function loginValidator(
   const login: { email: string; password: string } = req.body;
   const schema = Joi.object({
     password: Joi.string()
-    .required()
-    .pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,30}$")),
-    
+    .required(),    
 
     email: Joi.string().email().required(),
   });
@@ -80,9 +77,7 @@ export async function resetInputValidator(
   const login = req.body;
   const schema = Joi.object({
     password: Joi.string()
-  .required()
-  .pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,30}$")),
-
+  .required(),
   });
 
   try {
